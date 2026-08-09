@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Persnickety Window Cleaning | Cuyahoga Falls, OH</title>
+<meta name="description" content="Professional residential and commercial window cleaning in Cuyahoga Falls, Silver Lake, Stow, Akron and surrounding Northeast Ohio communities.">
+<style>
+:root {
+  --navy:#061a34;
+  --navy2:#0a274b;
+  --gold:#d6ad5c;
+  --gold2:#f0cb7b;
+  --cream:#f7f3ea;
+  --ink:#172235;
+  --muted:#6f7888;
+  --line:#e7e7e7;
+  --white:#fff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;color:var(--ink);background:#fff;line-height:1.55}
+a{color:inherit;text-decoration:none}
+.container{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:50;background:rgba(6,26,52,.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav{height:80px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff}
+.brand img{width:52px;height:52px;object-fit:contain}
+.brand strong{font-family:Georgia,serif;font-size:22px;letter-spacing:1.6px;text-transform:uppercase;display:block;line-height:1}
+.brand span{color:var(--gold2);font-size:10px;letter-spacing:3px}
+nav{display:flex;gap:26px;align-items:center;color:#fff;font-size:14px;font-weight:700}
+nav a:hover{color:var(--gold2)}
+.phone{background:var(--gold);color:var(--navy);padding:12px 18px;border-radius:999px;font-weight:900}
+
+.hero{min-height:690px;background:
+radial-gradient(circle at 76% 26%,rgba(214,173,92,.21),transparent 30%),
+linear-gradient(120deg,#04152a,#082448 70%,#0d315b);
+color:#fff;overflow:hidden}
+.hero-grid{display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:56px;padding:82px 0}
+.kicker{text-transform:uppercase;letter-spacing:3px;color:var(--gold2);font-size:12px;font-weight:900;margin-bottom:18px}
+h1,h2,h3{margin:0}
+.hero h1{font-family:Georgia,serif;font-size:clamp(50px,6.4vw,82px);line-height:.98;letter-spacing:-2.2px}
+.hero h1 em{font-style:normal;color:var(--gold2)}
+.hero p{font-size:20px;max-width:650px;color:rgba(255,255,255,.8);margin:26px 0 30px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;border-radius:999px;font-weight:900;border:1px solid transparent}
+.btn.gold{background:var(--gold);color:var(--navy)}
+.btn.ghost{border-color:rgba(255,255,255,.35);color:#fff}
+.proof{display:flex;gap:20px;flex-wrap:wrap;margin-top:28px;font-size:13px;font-weight:700;color:rgba(255,255,255,.72)}
+.proof span:before{content:"✓";color:var(--gold2);margin-right:7px}
+
+.hero-art{position:relative;display:grid;place-items:center;min-height:470px}
+.hero-ring{position:absolute;width:430px;height:430px;border:1px solid rgba(214,173,92,.28);border-radius:50%}
+.hero-ring:after{content:"";position:absolute;inset:40px;border:1px solid rgba(214,173,92,.15);border-radius:50%}
+.hero-art img{position:relative;width:min(470px,96%);filter:drop-shadow(0 25px 35px rgba(0,0,0,.32))}
+
+.trust{background:var(--cream);border-bottom:1px solid var(--line)}
+.trust-grid{display:grid;grid-template-columns:repeat(4,1fr)}
+.trust-item{padding:24px;text-align:center;border-right:1px solid var(--line)}
+.trust-item:last-child{border-right:0}
+.trust-item b{display:block;color:var(--navy);font-size:16px}
+.trust-item span{font-size:12px;color:var(--muted)}
+
+section{padding:96px 0}
+.heading{max-width:760px;margin-bottom:48px}
+.heading.center{text-align:center;margin-left:auto;margin-right:auto}
+.heading h2{font-family:Georgia,serif;font-size:clamp(40px,5vw,58px);line-height:1.02;color:var(--navy)}
+.heading p{font-size:18px;color:var(--muted);margin:15px 0 0}
+
+.photo-strip{display:grid;grid-template-columns:1.4fr .8fr .8fr;gap:18px}
+.photo-placeholder{min-height:320px;border-radius:24px;overflow:hidden;position:relative;background:
+linear-gradient(145deg,rgba(6,26,52,.1),rgba(214,173,92,.14)),
+repeating-linear-gradient(45deg,#edf0f4 0,#edf0f4 16px,#e8ebef 16px,#e8ebef 32px);border:1px solid #dfe3e8}
+.photo-placeholder.tall{min-height:420px}
+.photo-label{position:absolute;left:18px;bottom:18px;background:rgba(6,26,52,.92);color:#fff;padding:10px 14px;border-radius:12px;font-size:13px;font-weight:800}
+.photo-label small{display:block;color:var(--gold2);font-size:10px;letter-spacing:1.5px;text-transform:uppercase}
+
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{border:1px solid var(--line);border-radius:22px;padding:30px;background:#fff;transition:.2s}
+.card:hover{transform:translateY(-5px);box-shadow:0 18px 40px rgba(0,0,0,.08)}
+.card .num{font-family:Georgia,serif;color:var(--gold);font-size:34px;margin-bottom:12px}
+.card h3{font-size:20px;color:var(--navy);margin-bottom:8px}
+.card p{color:var(--muted);font-size:14px;margin:0}
+
+.why{background:var(--navy);color:#fff}
+.why-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
+.bigword{font-family:Georgia,serif;font-size:clamp(56px,7vw,94px);line-height:.92;color:var(--gold2);margin-bottom:20px}
+.definition{border-left:2px solid var(--gold);padding-left:20px;color:rgba(255,255,255,.72);max-width:470px}
+.why-list{display:grid;gap:12px}
+.why-item{padding:20px 22px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.055);border-radius:16px}
+.why-item b{color:var(--gold2);display:block;margin-bottom:4px}
+.why-item span{color:rgba(255,255,255,.7);font-size:14px}
+
+.reviews{background:var(--cream)}
+.review-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review{background:#fff;border-radius:20px;padding:28px;box-shadow:0 8px 24px rgba(0,0,0,.04)}
+.stars{color:#dcae45;letter-spacing:2px;margin-bottom:14px}
+.review p{color:#4f5b6c;margin:0 0 18px}
+.review b{color:var(--navy)}
+.review .placeholder{color:#9aa2ae;font-style:italic}
+
+.area-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.cities{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:24px}
+.city{border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-weight:800;color:var(--navy)}
+.map-placeholder{min-height:360px;border-radius:26px;background:
+radial-gradient(circle at 40% 45%,rgba(214,173,92,.3) 0 5px,transparent 6px),
+radial-gradient(circle at 60% 33%,rgba(214,173,92,.3) 0 5px,transparent 6px),
+linear-gradient(135deg,#e9eef3,#dfe6ec);
+position:relative;overflow:hidden;border:1px solid #dfe5eb}
+.map-placeholder:before,.map-placeholder:after{content:"";position:absolute;background:rgba(255,255,255,.7);height:10px;width:130%;transform:rotate(-18deg);left:-15%;top:38%;box-shadow:0 62px 0 rgba(255,255,255,.6),0 124px 0 rgba(255,255,255,.55)}
+.map-label{position:absolute;z-index:2;left:24px;bottom:24px;background:var(--navy);color:#fff;border-radius:14px;padding:12px 16px;font-weight:800}
+
+.cta{background:linear-gradient(120deg,#071b35,#0b2f58);color:#fff;border-radius:30px;padding:72px 28px;text-align:center}
+.cta h2{font-family:Georgia,serif;font-size:clamp(40px,5vw,60px);line-height:1.03}
+.cta p{color:rgba(255,255,255,.72);font-size:18px;max-width:620px;margin:16px auto 26px}
+
+footer{background:#031124;color:#fff;margin-top:90px;padding:58px 0 28px}
+.footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+footer h4{color:var(--gold2);margin:0 0 12px}
+footer p,footer li,footer a{color:rgba(255,255,255,.65);font-size:14px}
+footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.copy{border-top:1px solid rgba(255,255,255,.1);margin-top:36px;padding-top:22px;color:rgba(255,255,255,.4);font-size:12px}
+
+@media(max-width:900px){
+ nav{display:none}
+ .hero-grid,.why-grid,.area-grid{grid-template-columns:1fr}
+ .services-grid,.review-grid{grid-template-columns:1fr 1fr}
+ .trust-grid{grid-template-columns:1fr 1fr}
+ .photo-strip{grid-template-columns:1fr 1fr}
+ .photo-strip .tall{grid-column:1/-1}
+}
+@media(max-width:600px){
+ section{padding:72px 0}
+ .hero-grid{padding:62px 0}
+ .hero h1{font-size:48px}
+ .hero p{font-size:17px}
+ .services-grid,.review-grid,.trust-grid,.cities,.photo-strip{grid-template-columns:1fr}
+ .photo-strip .tall{grid-column:auto}
+ .brand strong{font-size:17px}
+ .brand span{letter-spacing:2px}
+ .phone{font-size:12px;padding:10px 12px}
+ .footer-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#">
+      <img src="assets/images/pwc-logo-man.png" alt="Persnickety Window Cleaning">
+      <div><strong>Persnickety</strong><span>WINDOW CLEANING</span></div>
+    </a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#why">Why Persnickety</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#areas">Service Area</a>
+    </nav>
+    <a class="phone" href="tel:3303538326">330-353-8326</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="kicker">Professional Window Cleaning • Northeast Ohio</div>
+      <h1>Crystal Clear Windows.<br><em>Persnickety</em> Attention to Detail.</h1>
+      <p>Professional residential and commercial window cleaning for Cuyahoga Falls, Silver Lake, Stow, Akron and surrounding communities.</p>
+      <div class="actions">
+        <a class="btn gold" href="tel:3303538326">Get a Free Estimate</a>
+        <a class="btn ghost" href="sms:3303538326">Text John</a>
+      </div>
+      <div class="proof">
+        <span>Fully Insured</span>
+        <span>Local Company</span>
+        <span>5-Star Service</span>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="hero-ring"></div>
+      <img src="assets/images/pwc-logo-man.png" alt="Persnickety Window Cleaning mascot">
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="container trust-grid">
+    <div class="trust-item"><b>5-Star Service</b><span>Built on customer recommendations</span></div>
+    <div class="trust-item"><b>Free Estimates</b><span>Clear, straightforward pricing</span></div>
+    <div class="trust-item"><b>Fully Insured</b><span>Professional service at your home</span></div>
+    <div class="trust-item"><b>Local & Responsive</b><span>Cuyahoga Falls based</span></div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="heading">
+      <div class="kicker">Real Work. Real Homes.</div>
+      <h2>This is where your best job photos will sell the company.</h2>
+      <p>For this draft I left clean placeholders. Once you give me your Google/Facebook photos, these become actual Persnickety jobs—not stock photos.</p>
+    </div>
+    <div class="photo-strip">
+      <div class="photo-placeholder tall"><div class="photo-label"><small>Featured Job</small>Large residential window cleaning photo</div></div>
+      <div class="photo-placeholder"><div class="photo-label"><small>Before / After</small>Close-up glass result</div></div>
+      <div class="photo-placeholder"><div class="photo-label"><small>In Action</small>Crew or ladder photo</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="heading center">
+      <div class="kicker">What We Do</div>
+      <h2>Windows cleaned the way they should be.</h2>
+      <p>Focused window-cleaning expertise instead of trying to be every kind of exterior-cleaning company.</p>
+    </div>
+    <div class="services-grid">
+      <div class="card"><div class="num">01</div><h3>Residential Window Cleaning</h3><p>Interior and exterior cleaning with careful attention to glass, frames and the surrounding home.</p></div>
+      <div class="card"><div class="num">02</div><h3>Exterior-Only Cleaning</h3><p>Crystal-clear exterior glass with minimal disruption inside your home.</p></div>
+      <div class="card"><div class="num">03</div><h3>Storm Windows</h3><p>Detailed cleaning of traditional storm-window systems and multiple glass surfaces.</p></div>
+      <div class="card"><div class="num">04</div><h3>French Panes</h3><p>Careful work on divided-light windows and detailed glass that takes more time to do right.</p></div>
+      <div class="card"><div class="num">05</div><h3>Sunrooms & Solariums</h3><p>Hard-to-reach side and overhead glass cleaned safely and thoroughly.</p></div>
+      <div class="card"><div class="num">06</div><h3>Commercial Window Cleaning</h3><p>Dependable service for storefronts, offices and recurring commercial accounts.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="why" class="why">
+  <div class="container why-grid">
+    <div>
+      <div class="kicker">The Persnickety Difference</div>
+      <div class="bigword">Persnickety.</div>
+      <div class="definition">Particular about the details. Exacting about the result. That's not just the company name—it is the standard.</div>
+    </div>
+    <div class="why-list">
+      <div class="why-item"><b>We communicate.</b><span>You know when we're coming and what to expect.</span></div>
+      <div class="why-item"><b>We show up.</b><span>Reliability is part of the service, not a bonus.</span></div>
+      <div class="why-item"><b>We respect your home.</b><span>Professional equipment, careful work and attention to the surrounding space.</span></div>
+      <div class="why-item"><b>We notice the little things.</b><span>Because that is usually the difference between acceptable and excellent.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews">
+  <div class="container">
+    <div class="heading center">
+      <div class="kicker">Google Reviews</div>
+      <h2>Your reputation should do most of the selling.</h2>
+      <p>We'll replace these placeholders with your strongest real Google reviews.</p>
+    </div>
+    <div class="review-grid">
+      <div class="review"><div class="stars">★★★★★</div><p class="placeholder">“Best short review about quality and professionalism goes here.”</p><b>Google Customer</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p class="placeholder">“Best review mentioning communication, showing up, or reliability goes here.”</p><b>Google Customer</b></div>
+      <div class="review"><div class="stars">★★★★★</div><p class="placeholder">“Best review that makes someone comfortable hiring you for their home goes here.”</p><b>Google Customer</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="areas">
+  <div class="container area-grid">
+    <div>
+      <div class="heading">
+        <div class="kicker">Local Window Cleaning</div>
+        <h2>Serving Cuyahoga Falls and the surrounding area.</h2>
+        <p>This section can later link into individual local SEO pages for the towns you want to dominate in Google search.</p>
+      </div>
+      <div class="cities">
+        <div class="city">Cuyahoga Falls</div><div class="city">Silver Lake</div>
+        <div class="city">Stow</div><div class="city">Akron</div>
+        <div class="city">Tallmadge</div><div class="city">Richfield</div>
+        <div class="city">Fairlawn</div><div class="city">Copley</div>
+      </div>
+    </div>
+    <div class="map-placeholder"><div class="map-label">Google Maps / Service Area</div></div>
+  </div>
+</section>
+
+<section style="padding-top:20px">
+  <div class="container">
+    <div class="cta">
+      <div class="kicker">Free Estimates</div>
+      <h2>Ready for crystal clear windows?</h2>
+      <p>Call or text Persnickety Window Cleaning and we'll get you an estimate.</p>
+      <div class="actions" style="justify-content:center">
+        <a class="btn gold" href="tel:3303538326">Call 330-353-8326</a>
+        <a class="btn ghost" href="sms:3303538326">Text for an Estimate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:16px">
+          <img src="assets/images/pwc-logo-man.png" alt="Persnickety Window Cleaning">
+          <div><strong>Persnickety</strong><span>WINDOW CLEANING</span></div>
+        </div>
+        <p>Professional residential and commercial window cleaning serving Cuyahoga Falls and surrounding Northeast Ohio communities.</p>
+      </div>
+      <div><h4>Contact</h4><ul><li><a href="tel:3303538326">330-353-8326</a></li><li><a href="sms:3303538326">Text for an Estimate</a></li><li>Cuyahoga Falls, Ohio</li></ul></div>
+      <div><h4>Online</h4><ul><li><a href="https://www.facebook.com/PersnicketyWindowCleaning/" target="_blank">Facebook</a></li><li><a href="https://nextdoor.com/pages/persnickety-window-cleaning-cuyahoga-falls-oh/" target="_blank">Nextdoor</a></li><li><a href="https://maps.app.goo.gl/ZBbUhRbRUSNDUNiR8" target="_blank">Google Maps</a></li></ul></div>
+    </div>
+    <div class="copy">© <span id="year"></span> Persnickety Window Cleaning. All rights reserved.</div>
+  </div>
+</footer>
+<script>document.getElementById("year").textContent=new Date().getFullYear();</script>
+</body>
+</html>
