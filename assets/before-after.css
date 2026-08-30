@@ -74,6 +74,20 @@
   .before-after[data-before-after] .ba-label{top:10px;padding:6px 9px;font-size:10px}
   .before-after[data-before-after] .ba-label.before{left:10px}
   .before-after[data-before-after] .ba-label.after{right:10px}
-  .before-after[data-before-after] .ba-handle{width:44px;height:44px}
+  .before-after[data-before-after] .ba-handle{
+    width:48px;height:48px;border-width:2px;
+    box-shadow:0 5px 16px rgba(0,0,0,.32)
+  }
+  .before-after[data-before-after] .ba-handle::before{
+    content:"";
+    left:50%;top:50%;width:24px;height:16px;
+    transform:translate(-50%,-50%);
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16'%3E%3Cpath d='M9 3L4 8l5 5M4 8h16M15 3l5 5-5 5' fill='none' stroke='%23efd18e' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/24px 16px no-repeat
+  }
   .before-after-card[data-before-after]{max-width:none}
+  .before-after-card[data-before-after] .ba-handle{width:46px;height:46px}
+  .before-after-card[data-before-after] .ba-handle::before{
+    width:22px;height:15px;
+    background-size:22px 15px
+  }
 }
