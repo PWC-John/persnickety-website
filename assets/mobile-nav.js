@@ -2,7 +2,8 @@
   var path=window.location.pathname.replace(/\/+$/,'');
   var isHome=(path===''||path==='/index.html');
   var isResidential=(path==='/residential-window-cleaning');
-  var assetVersion='20260831-1849';
+  var isFreeEstimate=(path==='/free-estimate');
+  var assetVersion='20260831-2053';
 
   function removeLiteralNewlines(){
     var root=document.documentElement;
@@ -32,6 +33,14 @@
       sliderScript.defer=true;
       document.head.appendChild(sliderScript);
     }
+  }
+
+  function loadEstimateIntake(){
+    if(!isFreeEstimate||document.querySelector('script[src*="estimate-intake.js"]')) return;
+    var script=document.createElement('script');
+    script.src='/assets/estimate-intake.js?v='+assetVersion;
+    script.defer=true;
+    document.head.appendChild(script);
   }
 
   function bindSlider(root){
@@ -93,6 +102,7 @@
   }
 
   loadSliderAssets();
+  loadEstimateIntake();
   function runFixes(){removeLiteralNewlines();ensureResidentialSlider();}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',runFixes,{once:true});
   else runFixes();
