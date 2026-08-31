@@ -6,14 +6,17 @@
     if(after) after.src = '/assets/images/commercial-sunroom-after.avif';
     if(before) before.src = '/assets/images/commercial-sunroom-before.avif';
   }
+  function makeLandscape(root){
+    if(!root) return;
+    root.classList.add('ba-landscape');
+    setSunroomImages(root);
+  }
   function applyPageImages(){
     var path = window.location.pathname.replace(/\/+$/, '');
     if(path === '/commercial-window-cleaning'){
-      var commercialSlider = document.querySelector('[data-before-after]');
-      if(commercialSlider) commercialSlider.classList.add('before-after-landscape');
-      setSunroomImages(commercialSlider);
+      makeLandscape(document.querySelector('[data-before-after]'));
     } else if(path === '/our-work'){
-      setSunroomImages(document.querySelector('.before-after-card[data-before-after]'));
+      makeLandscape(document.querySelector('.before-after-card[data-before-after]'));
     }
   }
   function initBeforeAfter(root){
