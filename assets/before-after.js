@@ -1,22 +1,23 @@
 (function(){
+  var assetVersion='20260831-1812';
   function setSunroomImages(root){
     if(!root) return;
     var after = root.querySelector('.ba-after img');
     var before = root.querySelector('.ba-before img');
-    if(after) after.src = '/assets/images/commercial-sunroom-after.avif';
-    if(before) before.src = '/assets/images/commercial-sunroom-before.avif';
+    if(after) after.src = '/assets/images/commercial-sunroom-after.avif?v=' + assetVersion;
+    if(before) before.src = '/assets/images/commercial-sunroom-before.avif?v=' + assetVersion;
   }
   function setResidentialImages(root){
     if(!root) return;
     var after = root.querySelector('.ba-after img');
     var before = root.querySelector('.ba-before img');
     if(after){
-      after.src = '/assets/images/residential-arched-after.avif';
+      after.src = '/assets/images/residential-arched-after.avif?v=' + assetVersion;
       after.width = 720;
       after.height = 1128;
     }
     if(before){
-      before.src = '/assets/images/residential-arched-before.avif';
+      before.src = '/assets/images/residential-arched-before.avif?v=' + assetVersion;
       before.width = 718;
       before.height = 1135;
     }
@@ -40,8 +41,8 @@
     figure.className = 'before-after ba-residential';
     figure.setAttribute('data-before-after','');
     figure.innerHTML = '<div class="ba-viewport">' +
-      '<div class="ba-layer ba-after" aria-hidden="true"><img src="/assets/images/residential-arched-after.avif" alt="" width="720" height="1128" loading="lazy" decoding="async"></div>' +
-      '<div class="ba-layer ba-before" aria-hidden="true"><img src="/assets/images/residential-arched-before.avif" alt="" width="718" height="1135" loading="lazy" decoding="async"></div>' +
+      '<div class="ba-layer ba-after" aria-hidden="true"><img src="/assets/images/residential-arched-after.avif?v=' + assetVersion + '" alt="" width="720" height="1128" loading="lazy" decoding="async"></div>' +
+      '<div class="ba-layer ba-before" aria-hidden="true"><img src="/assets/images/residential-arched-before.avif?v=' + assetVersion + '" alt="" width="718" height="1135" loading="lazy" decoding="async"></div>' +
       '<div class="ba-label before" aria-hidden="true">Before</div>' +
       '<div class="ba-label after" aria-hidden="true">After</div>' +
       '<div class="ba-divider" aria-hidden="true"><span class="ba-handle">&lt;&gt;</span></div>' +
