@@ -1,4 +1,19 @@
 (function(){
+  function setSunroomImages(root){
+    if(!root) return;
+    var after = root.querySelector('.ba-after img');
+    var before = root.querySelector('.ba-before img');
+    if(after) after.src = '/assets/images/commercial-sunroom-after.webp';
+    if(before) before.src = '/assets/images/commercial-sunroom-before.webp';
+  }
+  function applyPageImages(){
+    var path = window.location.pathname.replace(/\/+$/, '');
+    if(path === '/commercial-window-cleaning'){
+      setSunroomImages(document.querySelector('[data-before-after]'));
+    } else if(path === '/our-work'){
+      setSunroomImages(document.querySelector('.before-after-card[data-before-after]'));
+    }
+  }
   function initBeforeAfter(root){
     if(root.dataset.baBound === 'true') return;
     var range = root.querySelector('.ba-range');
@@ -9,7 +24,10 @@
     update();
     root.dataset.baBound = 'true';
   }
-  function initAll(){document.querySelectorAll('[data-before-after]').forEach(initBeforeAfter);}
+  function initAll(){
+    applyPageImages();
+    document.querySelectorAll('[data-before-after]').forEach(initBeforeAfter);
+  }
   if(document.readyState === 'loading'){document.addEventListener('DOMContentLoaded', initAll);}
   else{initAll();}
 })();
