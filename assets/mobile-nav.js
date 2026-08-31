@@ -1,15 +1,16 @@
 (function(){
   var path=window.location.pathname.replace(/\/+$/,'');
-  if(path==='/residential-window-cleaning'){
-    if(!document.querySelector('link[href*="before-after.css"]')){
+  var needsFreshSlider=(path===''||path==='/index.html'||path==='/residential-window-cleaning');
+  if(needsFreshSlider){
+    if(!document.querySelector('link[href="/assets/before-after.css?v=20260831-1821"]')){
       var style=document.createElement('link');
       style.rel='stylesheet';
-      style.href='/assets/before-after.css?v=20260831-1812';
+      style.href='/assets/before-after.css?v=20260831-1821';
       document.head.appendChild(style);
     }
-    if(!document.querySelector('script[src*="before-after.js"]')){
+    if(!document.querySelector('script[src="/assets/before-after.js?v=20260831-1821"]')){
       var sliderScript=document.createElement('script');
-      sliderScript.src='/assets/before-after.js?v=20260831-1812';
+      sliderScript.src='/assets/before-after.js?v=20260831-1821';
       sliderScript.defer=true;
       document.head.appendChild(sliderScript);
     }
