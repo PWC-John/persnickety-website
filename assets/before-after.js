@@ -9,7 +9,9 @@
   function applyPageImages(){
     var path = window.location.pathname.replace(/\/+$/, '');
     if(path === '/commercial-window-cleaning'){
-      setSunroomImages(document.querySelector('[data-before-after]'));
+      var commercialSlider = document.querySelector('[data-before-after]');
+      setSunroomImages(commercialSlider);
+      if(commercialSlider) commercialSlider.classList.add('ba-landscape');
     } else if(path === '/our-work'){
       setSunroomImages(document.querySelector('.before-after-card[data-before-after]'));
     }
