@@ -3,15 +3,15 @@
     if(!root) return;
     var after = root.querySelector('.ba-after img');
     var before = root.querySelector('.ba-before img');
-    if(after) after.src = '/assets/images/commercial-sunroom-after.webp';
-    if(before) before.src = '/assets/images/commercial-sunroom-before.webp';
+    if(after) after.src = '/assets/images/commercial-sunroom-after.avif';
+    if(before) before.src = '/assets/images/commercial-sunroom-before.avif';
   }
   function applyPageImages(){
     var path = window.location.pathname.replace(/\/+$/, '');
     if(path === '/commercial-window-cleaning'){
       var commercialSlider = document.querySelector('[data-before-after]');
+      if(commercialSlider) commercialSlider.classList.add('before-after-landscape');
       setSunroomImages(commercialSlider);
-      if(commercialSlider) commercialSlider.classList.add('ba-landscape');
     } else if(path === '/our-work'){
       setSunroomImages(document.querySelector('.before-after-card[data-before-after]'));
     }
