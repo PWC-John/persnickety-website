@@ -1,0 +1,56 @@
+name: Mobile WebKit smoke test
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  iphone-webkit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright WebKit
+        run: |
+          pip install playwright
+          python -m playwright install --with-deps webkit
+      - name: Run local site
+        run: |
+          python -m http.server 8000 >/tmp/pwc-http.log 2>&1 &
+          sleep 2
+      - name: Test iPhone rendering
+        run: |
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+
+          routes = ['/', '/our-work/', '/commercial-window-cleaning/', '/residential-window-cleaning/']
+          with sync_playwright() as p:
+              iphone = p.devices['iPhone 14 Pro']
+              browser = p.webkit.launch()
+              context = browser.new_context(**iphone)
+              page = context.new_page()
+              for route in routes:
+                  page.goto('http://127.0.0.1:8000' + route, wait_until='networkidle')
+                  page.wait_for_timeout(1200)
+                  visible = page.locator('body').inner_text()
+                  if '\\n\\n' in visible or visible.lstrip().startswith('\\n'):
+                      raise AssertionError(f'Literal newline artifact visible on {route}: {visible[:80]!r}')
+                  print(route, 'clean; viewport=', page.viewport_size)
+
+              page.goto('http://127.0.0.1:8000/residential-window-cleaning/', wait_until='networkidle')
+              page.wait_for_timeout(1800)
+              imgs = page.locator('.ba-residential img[src*="residential-arched-"]')
+              if imgs.count() < 2:
+                  raise AssertionError('Residential arched before/after images are not rendered on iPhone WebKit')
+              handle = page.locator('.ba-residential .ba-handle').first
+              box = handle.bounding_box()
+              if not box or box['width'] < 60 or box['height'] < 60:
+                  raise AssertionError(f'Slider handle too small for touch: {box}')
+              print('Residential slider rendered with touch handle:', box)
+              browser.close()
+          PY
