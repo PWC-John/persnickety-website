@@ -4,6 +4,15 @@
   var isResidential=(path==='/residential-window-cleaning');
   var fresh='v='+Date.now();
 
+  function removeLiteralNewlineText(){
+    if(!document.body) return;
+    Array.from(document.body.childNodes).forEach(function(node){
+      if(node.nodeType!==Node.TEXT_NODE) return;
+      var value=node.nodeValue||'';
+      if(/^\s*(?:\\n)+\s*$/.test(value)) node.remove();
+    });
+  }
+
   function loadSliderAssets(){
     if(!(isHome||isResidential)) return;
     if(!document.querySelector('link[href*="before-after.css"]')){
@@ -31,6 +40,7 @@
   }
 
   function ensureResidentialSlider(){
+    removeLiteralNewlineText();
     if(isHome){document.querySelectorAll('.before-after[data-before-after]').forEach(setArchedImages);return;}
     if(!isResidential) return;
     var existing=document.querySelector('.ba-residential[data-before-after], .before-after[data-before-after]');
