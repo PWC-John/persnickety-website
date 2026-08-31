@@ -1,5 +1,5 @@
 (function(){
-  var assetVersion='20260831-1812';
+  var assetVersion='20260831-1821';
   function setSunroomImages(root){
     if(!root) return;
     var after = root.querySelector('.ba-after img');
