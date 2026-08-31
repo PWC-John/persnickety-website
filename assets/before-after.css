@@ -54,8 +54,24 @@
   position:absolute;z-index:10;inset:0;width:100%;height:100%;margin:0;opacity:.001;
   cursor:ew-resize;touch-action:pan-y
 }
-.before-after[data-before-after] .ba-caption{padding:16px 2px 0}
-.before-after[data-before-after] .ba-hint{margin-top:8px}
+.before-after[data-before-after] .ba-caption{padding:16px 2px 0;color:#08192c;font-weight:800;font-size:17px;line-height:1.4}
+.before-after[data-before-after] .ba-caption span{display:block;color:#9a7434;font-size:12px;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:5px}
+.before-after[data-before-after] .ba-hint{margin:8px 0 0;text-align:center;color:#687382;font-size:14px}
+
+/* Portrait residential comparison: larger on desktop, naturally responsive on phones. */
+.before-after.ba-residential[data-before-after]{
+  width:min(100%,560px);
+  max-width:560px;
+}
+.before-after.ba-residential[data-before-after] .ba-viewport{
+  aspect-ratio:720/1132;
+}
+.before-after.ba-residential[data-before-after] .ba-layer img{
+  object-fit:contain;
+  object-position:center;
+  background:#08192c;
+}
+
 .before-after.ba-landscape[data-before-after]{width:min(100%,980px);max-width:980px}
 .before-after.ba-landscape[data-before-after] .ba-viewport{aspect-ratio:3/2}
 .before-after.ba-landscape[data-before-after] .ba-layer img{
@@ -105,6 +121,9 @@
 @media(max-width:600px){
   .before-after[data-before-after]{width:100%;max-width:423px}
   .before-after[data-before-after] .ba-viewport{border-radius:16px}
+  .before-after.ba-residential[data-before-after]{width:100%;max-width:440px}
+  .before-after.ba-residential[data-before-after] .ba-viewport{aspect-ratio:720/1132}
+  .before-after.ba-residential[data-before-after] .ba-layer img{object-fit:contain}
   .before-after.ba-landscape[data-before-after]{width:100%;max-width:none}
   .before-after.ba-landscape[data-before-after] .ba-viewport{aspect-ratio:3/2}
   .before-after.ba-landscape[data-before-after] .ba-layer img{object-fit:contain}
