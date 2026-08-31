@@ -4,12 +4,12 @@
     if(!document.querySelector('link[href*="before-after.css"]')){
       var style=document.createElement('link');
       style.rel='stylesheet';
-      style.href='/assets/before-after.css';
+      style.href='/assets/before-after.css?v=20260831-1812';
       document.head.appendChild(style);
     }
     if(!document.querySelector('script[src*="before-after.js"]')){
       var sliderScript=document.createElement('script');
-      sliderScript.src='/assets/before-after.js';
+      sliderScript.src='/assets/before-after.js?v=20260831-1812';
       sliderScript.defer=true;
       document.head.appendChild(sliderScript);
     }
