@@ -1,4 +1,20 @@
 (function(){
+  var path=window.location.pathname.replace(/\/+$/,'');
+  if(path==='/residential-window-cleaning'){
+    if(!document.querySelector('link[href*="before-after.css"]')){
+      var style=document.createElement('link');
+      style.rel='stylesheet';
+      style.href='/assets/before-after.css';
+      document.head.appendChild(style);
+    }
+    if(!document.querySelector('script[src*="before-after.js"]')){
+      var sliderScript=document.createElement('script');
+      sliderScript.src='/assets/before-after.js';
+      sliderScript.defer=true;
+      document.head.appendChild(sliderScript);
+    }
+  }
+
   var button=document.querySelector('.menu-toggle');
   var nav=document.querySelector('.navlinks');
   if(!button||!nav)return;
