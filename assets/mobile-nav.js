@@ -3,7 +3,7 @@
   var isHome=(path===''||path==='/index.html');
   var isResidential=(path==='/residential-window-cleaning');
   var isFreeEstimate=(path==='/free-estimate');
-  var assetVersion='20260831-2053';
+  var assetVersion='20260831-2235';
 
   function removeLiteralNewlines(){
     var root=document.documentElement;
@@ -41,6 +41,31 @@
     script.src='/assets/estimate-intake.js?v='+assetVersion;
     script.defer=true;
     document.head.appendChild(script);
+  }
+
+  function bindContactAnalytics(){
+    if(document.documentElement.dataset.contactAnalyticsBound==='true') return;
+    document.documentElement.dataset.contactAnalyticsBound='true';
+    document.addEventListener('click',function(event){
+      var link=event.target.closest('a[href]');
+      if(!link) return;
+      var href=(link.getAttribute('href')||'').trim();
+      var method=null;
+      var eventName=null;
+      if(href.indexOf('tel:')===0){method='phone';eventName='phone_click';}
+      else if(href.indexOf('sms:')===0){method='text';eventName='text_click';}
+      else if(href.indexOf('mailto:')===0){method='email';eventName='email_click';}
+      else if(/(^|\/)free-estimate\/?(?:[?#].*)?$/.test(href)){method='estimate';eventName='free_estimate_click';}
+      if(!eventName||typeof window.gtag!=='function') return;
+      var location='body';
+      if(link.closest('header')) location='header';
+      else if(link.closest('footer')) location='footer';
+      window.gtag('event',eventName,{
+        contact_method:method,
+        link_location:location,
+        page_path:window.location.pathname
+      });
+    });
   }
 
   function bindSlider(root){
@@ -103,6 +128,7 @@
 
   loadSliderAssets();
   loadEstimateIntake();
+  bindContactAnalytics();
   function runFixes(){removeLiteralNewlines();ensureResidentialSlider();}
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',runFixes,{once:true});
   else runFixes();
