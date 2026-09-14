@@ -1,0 +1,54 @@
+name: Remove stale Google review count
+
+on:
+  push:
+    paths:
+      - ".github/workflows/remove-stale-review-count.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace hard-coded review counts
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          replacements = {
+            Path("index.html"): {
+              '<div class="kicker">5.0 from 14 Google Reviews</div>': '<div class="kicker">5.0 Google Rating</div>',
+            },
+            Path("reviews/index.html"): {
+              'Persnickety Window Cleaning has a 5.0 rating across 14 Google reviews.': 'Persnickety Window Cleaning has a 5.0 Google rating.',
+              '<span>5.0 from 14 Google Reviews</span>': '<span>5.0 Google Rating</span>',
+              '<span>Across 14 public reviews</span>': '<span>Public Google reviews</span>',
+              'Persnickety currently has a 5.0 rating across 14 Google reviews. Six representative customer experiences are featured below.': 'Persnickety currently has a 5.0 Google rating. Six representative customer experiences are featured below.',
+              '<b>Based on 14 Google reviews</b><span>Public rating checked August 2026</span>': '<b>5.0 Google Rating</b><span>See the current review count on Google</span>',
+            },
+          }
+
+          changed = 0
+          for path, pairs in replacements.items():
+              text = path.read_text(encoding="utf-8")
+              original = text
+              for old, new in pairs.items():
+                  text = text.replace(old, new)
+              if text != original:
+                  path.write_text(text, encoding="utf-8")
+                  changed += 1
+
+          if not changed:
+              raise SystemExit("No stale review count text found")
+          Path(".github/workflows/remove-stale-review-count.yml").unlink()
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html reviews/index.html .github/workflows/remove-stale-review-count.yml
+          git commit -m "Remove stale hard-coded Google review counts"
+          git push
