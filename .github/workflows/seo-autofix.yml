@@ -1,0 +1,71 @@
+name: SEO site autofix
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: startsWith(github.event.head_commit.message, 'SEO: bootstrap site fixes')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Apply deterministic SEO fixes
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          favicon = '<link rel="icon" type="image/png" href="/assets/images/pwc-logo-man.png">'
+          apple = '<link rel="apple-touch-icon" href="/assets/images/pwc-logo-man.png">'
+          viewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+
+          # Google Search reads the favicon declaration from the site homepage, but
+          # applying it consistently keeps browser tabs and every site page aligned.
+          for path in Path('.').rglob('*.html'):
+              text = path.read_text(encoding='utf-8')
+              changed = False
+              if '<link rel="icon"' not in text and viewport in text:
+                  text = text.replace(viewport, viewport + '\n' + favicon + '\n' + apple, 1)
+                  changed = True
+              if changed:
+                  path.write_text(text, encoding='utf-8')
+
+          home = Path('index.html')
+          text = home.read_text(encoding='utf-8')
+          replacements = {
+              '<title>Window Cleaning in Cuyahoga Falls, OH | Persnickety</title>':
+                  '<title>Window Cleaning Cuyahoga Falls, OH | Persnickety</title>',
+              '<meta name="description" content="Persnickety Window Cleaning provides residential and commercial window cleaning in Cuyahoga Falls, Silver Lake, Bath, Stow, Tallmadge, Akron and nearby Northeast Ohio communities. Call or text 330-353-8326 for a free estimate.">':
+                  '<meta name="description" content="Professional window cleaning in Cuyahoga Falls, Ohio, plus Silver Lake, Stow, Hudson, Akron and nearby Northeast Ohio communities. Residential and commercial service. Call or text 330-353-8326 for a free estimate.">',
+              '<div class="kicker">Professional Window Cleaning • Northeast Ohio</div><h1>Clean windows.<br><em>No shortcuts.</em></h1>':
+                  '<div class="kicker">Professional Window Cleaning • Cuyahoga Falls, Ohio</div><h1>Window cleaning.<br><em>No shortcuts.</em></h1>'
+          }
+          for old, new in replacements.items():
+              if old in text:
+                  text = text.replace(old, new, 1)
+          home.write_text(text, encoding='utf-8')
+
+          sitemap = Path('sitemap.xml')
+          if sitemap.exists():
+              xml = sitemap.read_text(encoding='utf-8')
+              pattern = r'(<loc>https://persnicketywindowcleaning\.com/</loc>\s*<lastmod>)[^<]+(</lastmod>)'
+              xml = re.sub(pattern, r'\g<1>2026-09-13\g<2>', xml, count=1)
+              sitemap.write_text(xml, encoding='utf-8')
+
+      - name: Commit site fixes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No SEO changes needed."
+            exit 0
+          fi
+          git add .
+          git commit -m "Apply SEO favicon and local relevance fixes"
+          git push
