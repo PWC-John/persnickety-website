@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   apply:
-    if: startsWith(github.event.head_commit.message, 'SEO: bootstrap site fixes')
+    if: "${{ startsWith(github.event.head_commit.message, 'SEO:') }}"
     runs-on: ubuntu-latest
     steps:
       - name: Check out site
@@ -25,15 +25,10 @@ jobs:
           apple = '<link rel="apple-touch-icon" href="/assets/images/pwc-logo-man.png">'
           viewport = '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
 
-          # Google Search reads the favicon declaration from the site homepage, but
-          # applying it consistently keeps browser tabs and every site page aligned.
           for path in Path('.').rglob('*.html'):
               text = path.read_text(encoding='utf-8')
-              changed = False
               if '<link rel="icon"' not in text and viewport in text:
                   text = text.replace(viewport, viewport + '\n' + favicon + '\n' + apple, 1)
-                  changed = True
-              if changed:
                   path.write_text(text, encoding='utf-8')
 
           home = Path('index.html')
