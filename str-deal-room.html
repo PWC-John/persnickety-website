@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>STR Deal Room</title>
+<style>
+:root{
+  --bg:#0b0f14;--panel:#121821;--panel2:#161e29;--line:#243041;--text:#f5f7fa;--muted:#98a6b8;
+  --accent:#d7ad57;--good:#67d391;--warn:#f2c35b;--bad:#f07474;--blue:#6fb2ff;--chip:#1d2734;
+  --shadow:0 16px 40px rgba(0,0,0,.28);--radius:18px;
+}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#090d12,#0d131b 55%,#0a0f15);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+button,input,select{font:inherit}.app{max-width:1440px;margin:0 auto;padding:20px 18px 80px}.topbar{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:16px}.brand h1{margin:0;font-size:clamp(28px,4vw,44px);letter-spacing:-.04em}.brand p{margin:7px 0 0;color:var(--muted);max-width:760px}.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:rgba(18,24,33,.82);padding:8px 12px;border-radius:999px;color:var(--muted);font-size:13px}.pill b{color:var(--text)}
+.grid{display:grid;gap:14px}.summary{grid-template-columns:repeat(6,minmax(0,1fr));margin:16px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px;box-shadow:var(--shadow)}.stat .k{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em}.stat .v{font-size:22px;font-weight:750;margin-top:5px}.stat .s{font-size:12px;color:var(--muted);margin-top:3px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;background:var(--panel);border:1px solid var(--line);padding:12px;border-radius:16px;position:sticky;top:8px;z-index:20;box-shadow:var(--shadow)}.toolbar select,.toolbar input{background:#0e141d;border:1px solid var(--line);color:var(--text);padding:10px 12px;border-radius:12px}.toolbar .grow{flex:1;min-width:220px}.btn{border:1px solid var(--line);background:#141c27;color:var(--text);padding:10px 13px;border-radius:12px;cursor:pointer;font-weight:650}.btn:hover{border-color:#3a4a60}.btn.primary{background:var(--accent);border-color:var(--accent);color:#17120a}.btn.ghost{background:transparent}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:28px 2px 12px}.section-head h2{margin:0;font-size:22px}.section-head p{margin:0;color:var(--muted);font-size:13px}
+.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.card{background:linear-gradient(180deg,var(--panel),#10161f);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}.card-top{padding:18px 18px 14px;display:flex;justify-content:space-between;gap:14px}.market{font-size:12px;color:var(--blue);font-weight:700;text-transform:uppercase;letter-spacing:.08em}.addr{font-size:21px;font-weight:760;letter-spacing:-.02em;margin-top:3px}.meta{color:var(--muted);font-size:13px;margin-top:5px}.price{text-align:right}.price .ask{font-size:24px;font-weight:800}.price .status{display:inline-flex;margin-top:7px;font-size:12px;font-weight:700;padding:6px 9px;border-radius:999px;background:var(--chip);border:1px solid var(--line)}.status.investigate{color:var(--good)}.status.watch{color:var(--warn)}.status.reject{color:var(--bad)}
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.metric{padding:13px 12px;border-right:1px solid var(--line);min-width:0}.metric:last-child{border-right:0}.metric .k{color:var(--muted);font-size:11px}.metric .v{font-size:16px;font-weight:760;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.metric .v.good{color:var(--good)}.metric .v.warn{color:var(--warn)}
+.card-body{padding:16px 18px 18px}.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.label{color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px}.chips{display:flex;flex-wrap:wrap;gap:7px}.chip{background:var(--chip);border:1px solid var(--line);padding:6px 8px;border-radius:9px;font-size:12px}.notes{font-size:13px;line-height:1.45;color:#d7dee8;margin:0;padding-left:18px}.notes li+li{margin-top:5px}.card-actions{display:flex;justify-content:space-between;gap:10px;margin-top:14px;align-items:center}.check{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}.check input{width:18px;height:18px;accent-color:var(--accent)}
+.assumptions{grid-template-columns:repeat(7,minmax(0,1fr));background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px}.field label{display:block;color:var(--muted);font-size:11px;margin-bottom:6px}.field input{width:100%;background:#0d141d;border:1px solid var(--line);border-radius:10px;padding:10px;color:var(--text)}
+.compare-wrap{overflow:auto;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:var(--shadow)}table{width:100%;border-collapse:collapse;min-width:980px}th,td{padding:12px 14px;border-bottom:1px solid var(--line);text-align:right;font-size:13px}th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--panel);z-index:1}thead th{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;background:#101720}tbody tr:last-child td{border-bottom:0}.strong{font-weight:780}.pos{color:var(--good)}.neg{color:var(--bad)}
+.drawer{position:fixed;inset:auto 0 0 0;background:#0d131b;border-top:1px solid var(--line);box-shadow:0 -20px 50px rgba(0,0,0,.35);padding:16px max(18px,env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));z-index:50;display:none}.drawer.show{display:block}.drawer-inner{max-width:1440px;margin:0 auto}.drawer h3{margin:0 0 8px}.drawer-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}.drawer .field input{padding:9px}.drawer-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:12px}.muted{color:var(--muted)}
+.empty{padding:42px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:18px}
+
+.detail{position:fixed;inset:0;background:rgba(4,7,11,.76);z-index:70;display:none;padding:18px;overflow:auto}.detail.show{display:block}.detail-shell{max-width:1180px;margin:18px auto;background:#0f1620;border:1px solid var(--line);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden}.detail-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:14px;align-items:flex-start;position:sticky;top:0;background:#0f1620;z-index:5}.detail-head h2{margin:2px 0 0;font-size:24px}.tabs{display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);overflow:auto;background:#0d131b;position:sticky;top:78px;z-index:4}.tab{border:1px solid var(--line);background:#121a25;color:var(--muted);padding:9px 12px;border-radius:10px;cursor:pointer;white-space:nowrap;font-weight:700}.tab.active{background:var(--accent);border-color:var(--accent);color:#17120a}.detail-body{padding:18px}.tabpane{display:none}.tabpane.active{display:block}.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px}.panel h3{margin:0 0 10px;font-size:16px}.panel p{font-size:13px;line-height:1.55;color:#d7dee8}.bigmetric{font-size:30px;font-weight:850;letter-spacing:-.03em}.package{border:1px solid var(--line);border-radius:14px;padding:13px;background:#101722;margin-top:10px}.package .row{display:flex;justify-content:space-between;gap:10px}.package ul{margin:8px 0 0;padding-left:18px;color:#d7dee8;font-size:13px}.concept-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.concept{min-height:170px;border:1px dashed #3a4a60;border-radius:16px;padding:15px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(145deg,#141d29,#0d131b)}.concept .icon{font-size:32px}.concept h4{margin:6px 0;font-size:15px}.concept p{margin:0;color:var(--muted);font-size:12px;line-height:1.4}.checkrow{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}.checkrow:last-child{border-bottom:0}.checkrow input{margin-top:3px;accent-color:var(--accent)}.callout{border-left:3px solid var(--accent);background:#151c26;padding:12px 14px;border-radius:0 12px 12px 0;font-size:13px;line-height:1.55}.revenuebar{height:8px;background:#0b1017;border-radius:999px;overflow:hidden;margin-top:8px}.revenuebar span{display:block;height:100%;background:linear-gradient(90deg,var(--accent),#f0d89c)}.mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mini{background:#0e151e;border:1px solid var(--line);border-radius:12px;padding:12px}.mini .k{color:var(--muted);font-size:11px}.mini .v{font-size:18px;font-weight:800;margin-top:4px}.closex{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#141c27;color:var(--text);font-size:20px;cursor:pointer}.design-banner{background:linear-gradient(135deg,#1a2230,#17140e);border:1px solid #4c3e24;border-radius:16px;padding:15px;margin-bottom:14px}.design-banner b{color:#f4d999}.scoreline{display:flex;gap:8px;flex-wrap:wrap}.scoretag{font-size:12px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#111924}.scoretag.good{color:var(--good);border-color:#31563e}.scoretag.warn{color:var(--warn);border-color:#5a4c29}
+@media(max-width:760px){.detail{padding:0}.detail-shell{margin:0;min-height:100%;border-radius:0}.detail-head{top:0}.tabs{top:77px}.detail-grid,.concept-grid{grid-template-columns:1fr}.mini-grid{grid-template-columns:1fr}.detail-body{padding:14px}}
+
+@media(max-width:1050px){.summary{grid-template-columns:repeat(3,1fr)}.assumptions{grid-template-columns:repeat(4,1fr)}.cards{grid-template-columns:1fr}.drawer-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:680px){.app{padding:14px 12px 90px}.topbar{display:block}.topbar .pill{margin-top:12px}.summary{grid-template-columns:repeat(2,1fr)}.toolbar{top:5px}.toolbar .grow{min-width:100%}.metrics{grid-template-columns:repeat(2,1fr)}.metric:nth-child(2n){border-right:0}.metric:last-child{grid-column:1/-1;border-top:1px solid var(--line)}.cols{grid-template-columns:1fr}.assumptions{grid-template-columns:repeat(2,1fr)}.drawer-grid{grid-template-columns:repeat(2,1fr)}.addr{font-size:19px}.price .ask{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="market">STR #2 acquisition dashboard</div>
+      <h1>STR Deal Room</h1>
+      <p>Screen properties against the buy box, compare economics, and identify where hard-to-replicate real estate plus smart amenity upgrades can create outsized returns.</p>
+    </div>
+    <div class="pill"><span>Buy box</span><b>≤ $700K · ≤ $150K cash · ≥ $25K CF · 30% CoC target</b></div>
+  </div>
+
+  <div class="grid summary">
+    <div class="stat"><div class="k">Priority</div><div class="v">RRG, KY</div><div class="s">Primary market</div></div>
+    <div class="stat"><div class="k">Max price</div><div class="v">$700K</div><div class="s">Ceiling, not target</div></div>
+    <div class="stat"><div class="k">Max cash in</div><div class="v">$150K</div><div class="s">Down + close + initial capex</div></div>
+    <div class="stat"><div class="k">Capex budget</div><div class="v">$60K</div><div class="s">Amenity/value-add</div></div>
+    <div class="stat"><div class="k">Min cash flow</div><div class="v">$25K</div><div class="s">After debt service</div></div>
+    <div class="stat"><div class="k">Target CoC</div><div class="v">30%</div><div class="s">~$45K on $150K cash</div></div>
+  </div>
+
+  <div class="toolbar">
+    <input class="grow" id="search" placeholder="Search address, feature, or market…" />
+    <select id="marketFilter"><option value="all">All markets</option><option value="RRG">Red River Gorge</option><option value="GA">North Georgia</option></select>
+    <select id="statusFilter"><option value="all">All statuses</option><option value="Investigate">Investigate</option><option value="Watch">Watch</option><option value="Reject">Reject</option></select>
+    <button class="btn" id="compareBtn">Compare selected</button>
+    <button class="btn" id="exportBtn">Export CSV</button>
+    <button class="btn" id="addBtn">+ Add property</button>
+    <button class="btn primary" id="assumptionBtn">Edit assumptions</button>
+  </div>
+
+  <div class="section-head"><div><h2>Candidate properties</h2><p>Revenue values are editable underwriting assumptions, not appraisals or guarantees.</p></div><p id="count"></p></div>
+  <div class="grid cards" id="cards"></div>
+
+  <div class="section-head"><div><h2>Global underwriting assumptions</h2><p>Change these and every property recalculates instantly.</p></div></div>
+  <div class="grid assumptions" id="assumptionsInline"></div>
+
+  <div class="section-head"><div><h2>Side-by-side comparison</h2><p>Select up to three candidates from the cards.</p></div></div>
+  <div class="compare-wrap"><table id="compareTable"></table></div>
+</div>
+
+
+<div class="detail" id="detail"><div class="detail-shell">
+  <div class="detail-head"><div><div class="market" id="detailMarket"></div><h2 id="detailTitle"></h2><div class="meta" id="detailMeta"></div></div><button class="closex" id="detailClose">×</button></div>
+  <div class="tabs" id="detailTabs">
+    <button class="tab active" data-tab="overview">Overview</button><button class="tab" data-tab="underwrite">Underwrite</button><button class="tab" data-tab="design">Design Studio</button><button class="tab" data-tab="diligence">Diligence</button>
+  </div>
+  <div class="detail-body">
+    <section class="tabpane active" id="tab-overview"></section>
+    <section class="tabpane" id="tab-underwrite"></section>
+    <section class="tabpane" id="tab-design"></section>
+    <section class="tabpane" id="tab-diligence"></section>
+  </div>
+</div></div>
+
+<div class="drawer" id="drawer"><div class="drawer-inner">
+  <h3>Edit global assumptions</h3><div class="muted" style="font-size:13px;margin-bottom:10px">These are screening assumptions. Replace them with lender quotes and actual operating data as diligence progresses.</div>
+  <div class="drawer-grid" id="assumptionsDrawer"></div>
+  <div class="drawer-actions"><button class="btn ghost" id="resetAssumptions">Reset</button><button class="btn primary" id="closeDrawer">Done</button></div>
+</div></div>
+
+<script>
+const defaults={downPct:15,rate:7.25,term:30,closingPct:3,opPct:32,capex:30000,targetCF:25000,targetCoC:30};
+let assumptions=JSON.parse(localStorage.getItem('str-assumptions')||'null')||{...defaults};
+let selected=[];
+const seedProperties=[
+ {id:'pine67',market:'RRG',city:'Campton, KY',address:'67 Pine Mountain Rd',price:294900,beds:5,baths:3,sqft:2200,acres:7.68,sleeps:'10–14 est.',status:'Investigate',url:'https://www.zillow.com/homedetails/67-Pine-Mountain-Rd-Campton-KY-41301/2091969524_zpid/',grossBase:65000,grossOpt:80000,grossValue:95000,capex:60000,features:['7.68 acres','Private pool','Bonus room','Backs to Daniel Boone NF','No HOA reported'],risks:['Verify STR legality for parcel','Confirm septic/occupancy capacity','Pool is above-ground; may need experience upgrade'],notes:'Best low-basis value-add candidate from first pass.'},
+ {id:'oak300',market:'RRG',city:'Stanton, KY',address:'300 Oak Ridge Dr',price:529900,beds:5,baths:3.5,sqft:4252,acres:3.42,sleeps:'12–16 est.',status:'Watch',url:'https://www.zillow.com/homedetails/300-Oak-Ridge-Dr-Stanton-KY-40380/128505125_zpid/',grossBase:80000,grossOpt:100000,grossValue:120000,capex:50000,features:['4,252 sf','3.42 acres','Large walkout lower level','No HOA reported','~15 min to Slade'],risks:['Higher basis pushes revenue hurdle up','Need proof large-group demand supports $115K+ gross'],notes:'Big-house conversion play with strong interior square footage.'},
+ {id:'laurel168',market:'RRG',city:'Stanton, KY',address:'168 Laurel Ln',price:579000,beds:null,baths:null,sqft:null,acres:null,sleeps:'14',status:'Watch',url:'https://www.zillow.com/homedetails/168-Laurel-Ln-Stanton-KY-40380/463126972_zpid/',grossBase:90000,grossOpt:108000,grossValue:122000,capex:35000,features:['Sleeps 14','Across from Martin’s Fork trailhead','Basement workshop','Climbing access nearby'],risks:['Need exact bed/bath + historical revenue','Purchase basis demands strong gross'],notes:'Strong experience/location thesis; basement has obvious amenity potential.'},
+ {id:'cliff554',market:'RRG',city:'Campton, KY',address:'554 Cliffview Rd',price:600000,beds:null,baths:null,sqft:null,acres:null,sleeps:'Multi-cabin',status:'Watch',url:'https://www.zillow.com/homedetails/554-Cliffview-Rd-Campton-KY-41301/464661957_zpid/',grossBase:95000,grossOpt:110000,grossValue:125000,capex:20000,features:['Two separate cabins','Distinctive Hobbit House','Cliffview Resort location','Built-in differentiation'],risks:['Need trailing P&L by unit','Resort/HOA rules and fees must be verified'],notes:'Differentiation is valuable; only worth premium with verified revenue.'},
+ {id:'brook126',market:'GA',city:'Blue Ridge, GA',address:'126 Brookwood Dr',price:599900,beds:4,baths:3,sqft:null,acres:null,sleeps:'12',status:'Watch',url:'https://www.zillow.com/homedetails/126-Brookwood-Dr-Blue-Ridge-GA-30513/228810293_zpid/',grossBase:83000,grossOpt:95000,grossValue:110000,capex:20000,features:['Creekfront','Hot tub','Existing STR','Game/recreation space','Furnished'],risks:['Current public comp signal may not support 30% CoC','Need lower basis or stronger verified revenue'],notes:'Useful Georgia benchmark; more turnkey, less hidden upside.'}
+];
+let properties=JSON.parse(localStorage.getItem('str-properties')||'null')||seedProperties;
+function saveProperties(){localStorage.setItem('str-properties',JSON.stringify(properties))}
+
+function money(n){if(n==null||!isFinite(n))return '—';return '$'+Math.round(n).toLocaleString()}
+function pct(n){if(n==null||!isFinite(n))return '—';return n.toFixed(1)+'%'}
+function monthlyPI(principal, annualRate, years){const r=annualRate/100/12,n=years*12;if(!r)return principal/n;return principal*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1)}
+function calc(p,gross){const down=p.price*assumptions.downPct/100;const closing=p.price*assumptions.closingPct/100;const capex=p.capex??assumptions.capex;const cash=down+closing+capex;const debt=p.price-down;const ads=monthlyPI(debt,assumptions.rate,assumptions.term)*12;const noi=gross*(1-assumptions.opPct/100);const cf=noi-ads;const coc=cash?cf/cash*100:0;return {down,closing,capex,cash,debt,ads,noi,cf,coc}}
+function grossForCF(p,targetCF){const down=p.price*assumptions.downPct/100;const debt=p.price-down;const ads=monthlyPI(debt,assumptions.rate,assumptions.term)*12;return (targetCF+ads)/(1-assumptions.opPct/100)}
+function grossForCoC(p,targetPct){const down=p.price*assumptions.downPct/100;const closing=p.price*assumptions.closingPct/100;const capex=p.capex??assumptions.capex;const cash=down+closing+capex;return grossForCF(p,cash*targetPct/100)}
+
+function renderAssumptionFields(containerId){const c=document.getElementById(containerId);const defs=[['downPct','Down payment %'],['rate','Interest rate %'],['term','Loan term (yr)'],['closingPct','Closing costs %'],['opPct','Operating costs %'],['targetCF','Min cash flow $'],['targetCoC','Target CoC %']];c.innerHTML=defs.map(([k,l])=>`<div class="field"><label>${l}</label><input type="number" step="0.25" data-assumption="${k}" value="${assumptions[k]}"></div>`).join('');c.querySelectorAll('input').forEach(i=>i.addEventListener('input',e=>{assumptions[e.target.dataset.assumption]=Number(e.target.value);localStorage.setItem('str-assumptions',JSON.stringify(assumptions));syncAssumptions();render();}));}
+function syncAssumptions(){document.querySelectorAll('[data-assumption]').forEach(i=>{const k=i.dataset.assumption;if(document.activeElement!==i)i.value=assumptions[k]});}
+
+function card(p){const c=calc(p,p.grossOpt), needCF=grossForCF(p,assumptions.targetCF), needCoC=grossForCoC(p,assumptions.targetCoC);return `<article class="card" data-id="${p.id}">
+<div class="card-top"><div><div class="market">${p.market==='RRG'?'Red River Gorge':'North Georgia'} · ${p.city}</div><div class="addr">${p.address}</div><div class="meta">${p.beds??'—'} BR · ${p.baths??'—'} BA · ${p.sqft?Number(p.sqft).toLocaleString()+' sf':'size TBD'} · sleeps ${p.sleeps}</div></div><div class="price"><div class="ask">${money(p.price)}</div><div class="status ${p.status.toLowerCase()}">${p.status}</div></div></div>
+<div class="metrics"><div class="metric"><div class="k">Cash in</div><div class="v ${c.cash<=150000?'good':'warn'}">${money(c.cash)}</div></div><div class="metric"><div class="k">Opt. gross</div><div class="v">${money(p.grossOpt)}</div></div><div class="metric"><div class="k">Opt. cash flow</div><div class="v ${c.cf>=25000?'good':'warn'}">${money(c.cf)}</div></div><div class="metric"><div class="k">Opt. CoC</div><div class="v ${c.coc>=30?'good':'warn'}">${pct(c.coc)}</div></div><div class="metric"><div class="k">Gross for 30% CoC</div><div class="v">${money(needCoC)}</div></div></div>
+<div class="card-body"><div class="cols"><div><div class="label">Why it matters</div><div class="chips">${p.features.map(x=>`<span class="chip">${x}</span>`).join('')}</div><div class="label" style="margin-top:14px">Thesis</div><div style="font-size:13px;line-height:1.45">${p.notes}</div></div><div><div class="label">Diligence risks</div><ul class="notes">${p.risks.map(x=>`<li>${x}</li>`).join('')}</ul><div class="label" style="margin-top:14px">Revenue hurdles</div><div style="font-size:13px;line-height:1.55"><b>${money(needCF)}</b> gross for ${money(assumptions.targetCF)} CF<br><b>${money(needCoC)}</b> gross for ${assumptions.targetCoC}% CoC</div></div></div>
+<div class="card-actions"><label class="check"><input type="checkbox" class="selector" data-id="${p.id}" ${selected.includes(p.id)?'checked':''}> Compare</label><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end">${p.url?`<button class="btn ghost" onclick="window.open('${p.url}','_blank')">Open listing</button>`:''}<button class="btn primary" onclick="openDetail('${p.id}')">Analyze</button><button class="btn" onclick="editProperty('${p.id}')">Quick edit</button></div></div></div></article>`}
+
+function filtered(){const q=document.getElementById('search').value.trim().toLowerCase(),m=document.getElementById('marketFilter').value,s=document.getElementById('statusFilter').value;return properties.filter(p=>(m==='all'||p.market===m)&&(s==='all'||p.status===s)&&(!q||JSON.stringify(p).toLowerCase().includes(q)))}
+function renderCards(){const list=filtered();document.getElementById('cards').innerHTML=list.map(card).join('')||'<div class="empty">No properties match these filters.</div>';document.getElementById('count').textContent=list.length+' candidate'+(list.length===1?'':'s');document.querySelectorAll('.selector').forEach(cb=>cb.addEventListener('change',e=>{const id=e.target.dataset.id;if(e.target.checked){if(selected.length>=3){e.target.checked=false;alert('Select up to three properties for comparison.');return}selected.push(id)}else selected=selected.filter(x=>x!==id);renderCompare()}));}
+function renderCompare(){const list=(selected.length?selected:properties.slice(0,3).map(p=>p.id)).map(id=>properties.find(p=>p.id===id));const rows=[['Asking price',p=>money(p.price)],['Beds / baths',p=>`${p.beds??'—'} / ${p.baths??'—'}`],['Sleeps',p=>p.sleeps],['Cash required',p=>money(calc(p,p.grossOpt).cash)],['As-is gross',p=>money(p.grossBase)],['Optimized gross',p=>money(p.grossOpt)],['Value-add gross',p=>money(p.grossValue)],['Opt. annual debt',p=>money(calc(p,p.grossOpt).ads)],['Opt. cash flow',p=>{const v=calc(p,p.grossOpt).cf;return `<span class="${v>=25000?'pos':'neg'}">${money(v)}</span>`}],['Opt. CoC',p=>{const v=calc(p,p.grossOpt).coc;return `<span class="${v>=30?'pos':''}">${pct(v)}</span>`}],['Value-add CF',p=>money(calc(p,p.grossValue).cf)],['Value-add CoC',p=>pct(calc(p,p.grossValue).coc)],['Gross for $25K CF',p=>money(grossForCF(p,25000))],['Gross for 30% CoC',p=>money(grossForCoC(p,30))]];document.getElementById('compareTable').innerHTML=`<thead><tr><th>Metric</th>${list.map(p=>`<th>${p.address}</th>`).join('')}</tr></thead><tbody>${rows.map(([l,f])=>`<tr><td class="strong">${l}</td>${list.map(p=>`<td>${f(p)}</td>`).join('')}</tr>`).join('')}</tbody>`}
+
+function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function designProfile(p){
+ const base=p.market==='RRG'?{
+  guest:'Multi-family adventure groups · hikers/climbers · reunion weekends',style:'Upscale modern-rustic adventure lodge',position:'Private group basecamp with a memorable outdoor + social experience',avoid:'Full luxury gut-renovations that photograph poorly relative to cost',gaps:['Hot tub / wellness moment','High-energy game/social zone','Premium fire-pit or covered outdoor hangout','Photo-worthy primary gathering space','Flexible bunk / group sleep configuration']
+ }:{guest:'Affluent family/friend mountain getaways · celebration weekends',style:'Warm contemporary Blue Ridge retreat',position:'Polished creek/mountain escape with resort-like amenities',avoid:'Generic cabin decor and expensive finishes that do not add booking utility',gaps:['Signature outdoor experience','Wellness amenity','Distinctive hero room','Premium bedding + lighting','All-weather entertainment']};
+ if(p.id==='pine67'){base.gaps=['Hot tub integrated with pool/deck zone','Game lounge in bonus/flex space','Premium fire-pit + string/landscape lighting','Bunk-forward sleep optimization','Hero living-room fireplace/media wall'];base.position='Private 7.68-acre RRG family compound with pool + adventure-lodge energy'}
+ if(p.id==='laurel168'){base.gaps=['Sauna/cold-plunge wellness room','Basement game/social conversion','Gear-drop/mudroom moment for climbers','Outdoor soak + fire experience','Better group dining / gathering identity'];base.position='Trailhead-adjacent adventure lodge for large groups that want convenience + recovery amenities'}
+ return base;
+}
+function packagesFor(p){
+ const d=designProfile(p); const max=p.capex||assumptions.capex;
+ return [
+  {name:'Light',cost:Math.min(12000,max),impact:'Listing conversion + modest ADR lift',conf:'High',items:['Paint/lighting/bedding refresh','Photo-first furniture staging','Exterior arrival + fire-pit styling']},
+  {name:'Medium',cost:Math.min(30000,max),impact:'Meaningful ADR + shoulder-season appeal',conf:'Medium–High',items:['Hot tub or wellness amenity','Game/social room buildout','Premium outdoor gathering zone']},
+  {name:'Value-Add',cost:Math.min(max,60000),impact:'Largest differentiation / gross upside',conf:'Medium',items:['Transformational flex-space conversion','Bunk/group-sleep optimization','Signature amenity + full photo relaunch']}
+ ];
+}
+function diligenceFor(p){return [
+ {k:'STR legality / jurisdiction confirmed',done:false},{k:'HOA / deed restrictions confirmed',done:false},{k:'Septic capacity supports target occupancy',done:false},{k:'Insurance quote obtained',done:false},{k:'Taxes + utilities verified',done:false},{k:'Road/access/flood risk checked',done:false},{k:'Amenity installation feasibility checked',done:false},{k:'Relevant STR comps validated',done:false},{k:'Historical P&L / bookings requested if existing STR',done:false},{k:'Contractor budget validated',done:false}
+]}
+function openDetail(id){
+ const p=properties.find(x=>x.id===id); if(!p)return; window.currentDetail=id;
+ const c=calc(p,p.grossOpt),cv=calc(p,p.grossValue),d=designProfile(p),packs=packagesFor(p),needCF=grossForCF(p,assumptions.targetCF),needCoC=grossForCoC(p,assumptions.targetCoC);
+ document.getElementById('detailMarket').textContent=(p.market==='RRG'?'RED RIVER GORGE':'NORTH GEORGIA')+' · '+p.city;
+ document.getElementById('detailTitle').textContent=p.address+' · '+money(p.price);
+ document.getElementById('detailMeta').textContent=`${p.beds??'—'} BR · ${p.baths??'—'} BA · sleeps ${p.sleeps} · ${p.status}`;
+ document.getElementById('tab-overview').innerHTML=`<div class="detail-grid"><div class="panel"><h3>Deal thesis</h3><p>${escapeHtml(p.notes)}</p><div class="scoreline">${p.features.map(x=>`<span class="scoretag good">${escapeHtml(x)}</span>`).join('')}</div></div><div class="panel"><h3>Immediate screen</h3><div class="mini-grid"><div class="mini"><div class="k">Cash required</div><div class="v">${money(c.cash)}</div></div><div class="mini"><div class="k">Opt. cash flow</div><div class="v">${money(c.cf)}</div></div><div class="mini"><div class="k">Opt. CoC</div><div class="v">${pct(c.coc)}</div></div></div><p>Optimized gross must reach <b>${money(needCF)}</b> to clear your ${money(assumptions.targetCF)} cash-flow floor and <b>${money(needCoC)}</b> to hit ${assumptions.targetCoC}% CoC.</p></div><div class="panel"><h3>Diligence risks</h3><ul class="notes">${p.risks.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul></div><div class="panel"><h3>Ideal renter position</h3><p><b>${escapeHtml(d.guest)}</b></p><p>${escapeHtml(d.position)}</p></div></div>`;
+ document.getElementById('tab-underwrite').innerHTML=`<div class="panel"><h3>Three-case underwriting</h3><div class="mini-grid"><div class="mini"><div class="k">As-Is Gross</div><div class="v">${money(p.grossBase)}</div><div class="k">CF ${money(calc(p,p.grossBase).cf)} · CoC ${pct(calc(p,p.grossBase).coc)}</div></div><div class="mini"><div class="k">Optimized Gross</div><div class="v">${money(p.grossOpt)}</div><div class="k">CF ${money(c.cf)} · CoC ${pct(c.coc)}</div></div><div class="mini"><div class="k">Value-Add Gross</div><div class="v">${money(p.grossValue)}</div><div class="k">CF ${money(cv.cf)} · CoC ${pct(cv.coc)}</div></div></div><div class="callout" style="margin-top:14px">These remain screening assumptions until supported by property-specific comp evidence and actual lender/insurance/tax inputs.</div><p><button class="btn primary" onclick="editProperty('${p.id}');openDetail('${p.id}')">Edit revenue + capex assumptions</button></p></div>`;
+ document.getElementById('tab-design').innerHTML=`<div class="design-banner"><div class="market">Designer Bot</div><h3 style="margin:4px 0 6px">${escapeHtml(d.style)}</h3><div style="font-size:13px;line-height:1.5">Target: <b>${escapeHtml(d.guest)}</b><br>${escapeHtml(d.position)}</div></div><div class="detail-grid"><div class="panel"><h3>Amenity gap</h3><ul class="notes">${d.gaps.map(x=>`<li>${escapeHtml(x)}</li>`).join('')}</ul><p><b>Do not waste money on:</b> ${escapeHtml(d.avoid)}</p></div><div class="panel"><h3>Revenue logic</h3><p>The design goal is not decoration. It is to create stronger listing thumbnails, a clearer guest use-case, more bookable group utility, and amenities that can defend ADR and shoulder-season demand.</p><div class="revenuebar"><span style="width:${Math.min(100,(p.grossValue/Math.max(p.grossBase,1))*60)}%"></span></div><p>Current modeled value-add spread: <b>${money(p.grossValue-p.grossBase)}</b> gross/year. Treat this as a hypothesis until comp-supported.</p></div></div><div class="panel" style="margin-top:14px"><h3>Upgrade packages</h3>${packs.map(x=>`<div class="package"><div class="row"><b>${x.name}</b><span>${money(x.cost)} · ${x.conf} confidence</span></div><div class="meta">${x.impact}</div><ul>${x.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`).join('')}</div><div class="panel" style="margin-top:14px"><h3>Concept render queue</h3><div class="concept-grid">${[['🏡','Exterior / arrival'],['🛋️','Living / hero room'],['🎮','Game / bunk / flex'],['🔥','Outdoor amenity zone']].map(([i,t])=>`<div class="concept"><div><div class="icon">${i}</div><h4>${t}</h4><p>Generate a photo-real concept tied to the target guest, budget, and revenue thesis.</p></div><button class="btn" onclick="requestRender('${p.id}','${t.replaceAll("'","")}')">Generate concept</button></div>`).join('')}</div><div class="callout" style="margin-top:12px">Actual remodel renders require a source listing photo plus an image-generation backend. The app hook is ready; once connected, these buttons can generate and save concepts directly to the property.</div></div>`;
+ const saved=JSON.parse(localStorage.getItem('str-diligence-'+p.id)||'null')||diligenceFor(p);
+ document.getElementById('tab-diligence').innerHTML=`<div class="panel"><h3>Before this property becomes “buyable”</h3>${saved.map((x,i)=>`<label class="checkrow"><input type="checkbox" ${x.done?'checked':''} onchange="toggleDil('${p.id}',${i},this.checked)"><span>${escapeHtml(x.k)}</span></label>`).join('')}</div>`;
+ document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('active',i===0)); document.querySelectorAll('.tabpane').forEach((x,i)=>x.classList.toggle('active',i===0));
+ document.getElementById('detail').classList.add('show');
+}
+function requestRender(id,room){const p=properties.find(x=>x.id===id);alert(`Render request prepared for ${p.address}: ${room}.\n\nTo produce a true remodel image, add the listing photo for this area. The hosted V1 keeps the render slot and prompt logic ready for the image backend.`)}
+function toggleDil(id,i,v){let d=JSON.parse(localStorage.getItem('str-diligence-'+id)||'null')||diligenceFor(properties.find(x=>x.id===id));d[i].done=v;localStorage.setItem('str-diligence-'+id,JSON.stringify(d))}
+
+function render(){renderCards();renderCompare();syncAssumptions()}
+
+function editProperty(id){const p=properties.find(x=>x.id===id);const base=prompt(`Edit ${p.address}\n\nEnter AS-IS gross revenue assumption:`,p.grossBase);if(base===null)return;const opt=prompt('Enter OPTIMIZED gross revenue assumption:',p.grossOpt);if(opt===null)return;const val=prompt('Enter VALUE-ADD gross revenue assumption:',p.grossValue);if(val===null)return;const cap=prompt('Enter planned improvement budget:',p.capex);if(cap===null)return;p.grossBase=Number(base)||0;p.grossOpt=Number(opt)||0;p.grossValue=Number(val)||0;p.capex=Number(cap)||0;saveProperties();render();}
+
+function addProperty(){
+ const address=prompt('Property address:'); if(!address)return;
+ const market=(prompt('Market: RRG or GA?','RRG')||'RRG').toUpperCase()==='GA'?'GA':'RRG';
+ const city=prompt('City / State:',market==='RRG'?'Stanton, KY':'Blue Ridge, GA')||'';
+ const price=Number(prompt('Asking price:','500000'))||0;
+ const beds=Number(prompt('Bedrooms:','4'))||null;
+ const baths=Number(prompt('Bathrooms:','3'))||null;
+ const sleeps=prompt('Guest capacity / sleeps:','12')||'TBD';
+ const grossOpt=Number(prompt('Optimized gross assumption:','90000'))||0;
+ const capex=Number(prompt('Planned improvement budget:','30000'))||0;
+ const url=prompt('Listing URL (optional):','')||'';
+ const id='p'+Date.now();
+ properties.unshift({id,market,city,address,price,beds,baths,sqft:null,acres:null,sleeps,status:'Investigate',url,grossBase:Math.round(grossOpt*.82),grossOpt,grossValue:Math.round(grossOpt*1.15),capex,features:['New candidate'],risks:['Complete STR legality and comp diligence'],notes:'Manually added candidate.'});
+ saveProperties();render();
+}
+function exportCSV(){
+ const headers=['Address','Market','City','Ask','Beds','Baths','Sleeps','Status','Cash Required','As-Is Gross','Optimized Gross','Value-Add Gross','Optimized Cash Flow','Optimized CoC','Gross for 25K CF','Gross for 30% CoC','Listing URL'];
+ const rows=properties.map(p=>{const c=calc(p,p.grossOpt);return [p.address,p.market,p.city,p.price,p.beds??'',p.baths??'',p.sleeps,p.status,Math.round(c.cash),p.grossBase,p.grossOpt,p.grossValue,Math.round(c.cf),c.coc.toFixed(1),Math.round(grossForCF(p,25000)),Math.round(grossForCoC(p,30)),p.url||'']});
+ const esc=v=>'"'+String(v??'').replaceAll('"','""')+'"';
+ const csv=[headers,...rows].map(r=>r.map(esc).join(',')).join('\n');
+ const blob=new Blob([csv],{type:'text/csv'}); const u=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=u;a.download='str-deal-room.csv';a.click();URL.revokeObjectURL(u);
+}
+['search','marketFilter','statusFilter'].forEach(id=>document.getElementById(id).addEventListener(id==='search'?'input':'change',render));
+document.getElementById('compareBtn').onclick=()=>document.querySelector('.compare-wrap').scrollIntoView({behavior:'smooth'});
+document.getElementById('addBtn').onclick=addProperty;
+document.getElementById('exportBtn').onclick=exportCSV;
+document.getElementById('assumptionBtn').onclick=()=>document.getElementById('drawer').classList.add('show');
+document.getElementById('closeDrawer').onclick=()=>document.getElementById('drawer').classList.remove('show');
+document.getElementById('resetAssumptions').onclick=()=>{assumptions={...defaults};localStorage.setItem('str-assumptions',JSON.stringify(assumptions));syncAssumptions();render();};
+renderAssumptionFields('assumptionsInline');
+document.getElementById('detailClose').addEventListener('click',()=>document.getElementById('detail').classList.remove('show'));
+document.getElementById('detail').addEventListener('click',e=>{if(e.target.id==='detail')e.currentTarget.classList.remove('show')});
+document.getElementById('detailTabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tabpane').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.getElementById('tab-'+b.dataset.tab).classList.add('active')});
+renderAssumptionFields('assumptionsDrawer');render();
+</script>
+</body>
+</html>
